@@ -10,13 +10,16 @@ package ed.davidnavarroc.proyecto2;
  */
 public class Menu extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
+     private Gestor gestor = new Gestor();
+    
+     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
 
     /**
      * Creates new form Menu
      */
     public Menu() {
         initComponents();
+        
     }
 
     /**
@@ -86,6 +89,10 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnRegistroDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroDepartamentosActionPerformed
         // TODO add your handling code here:
+        RegistroDepartamentos ventanaRegistroDepartamentos = new RegistroDepartamentos();
+        ventanaRegistroDepartamentos.setVisible(true);
+        ventanaRegistroDepartamentos.recibirGestor(gestor);
+        ventanaRegistroDepartamentos.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnRegistroDepartamentosActionPerformed
 
     /**

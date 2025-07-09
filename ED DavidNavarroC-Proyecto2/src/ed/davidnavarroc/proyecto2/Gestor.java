@@ -5,6 +5,7 @@
 package ed.davidnavarroc.proyecto2;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Gestor {
     
@@ -80,6 +81,8 @@ public class Gestor {
         
         return true;
     }
+    
+    
     
     
 }

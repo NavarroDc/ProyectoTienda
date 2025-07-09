@@ -4,6 +4,8 @@
  */
 package ed.davidnavarroc.proyecto2;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author angel
@@ -16,6 +18,20 @@ public class RegistroDepartamentos extends javax.swing.JFrame {
     
     public void recibirGestor(Gestor gestor){ //Método público para compartir la misma instancia con otras ventanas
         this.gestor = gestor;
+    }
+    
+    public void mostrarDepartamentos(){
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaDepartamentos.getModel();
+        modeloTabla.setRowCount(0);
+        
+        Departamento[] listaDepartamentos = gestor.getDepartamentos();
+        
+        for(int i = 0; i <= gestor.getUltimoDep(); i++){
+            Departamento departamento = listaDepartamentos[i];
+            if(departamento != null){
+                modeloTabla.addRow(new Object[]{departamento.getId(), departamento.getNombre()});
+            }
+        }
     }
 
     /**
@@ -39,16 +55,42 @@ public class RegistroDepartamentos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         registroNombre = new javax.swing.JTextField();
         agregarDepartamento = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaDepartamentos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("ID del departamento");
 
         registroID.setEditable(false);
+        registroID.setText("ID Automático");
 
         jLabel2.setText("Nombre del departamento:");
 
         agregarDepartamento.setText("Agregar");
+        agregarDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarDepartamentoActionPerformed(evt);
+            }
+        });
+
+        tablaDepartamentos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaDepartamentos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -56,15 +98,18 @@ public class RegistroDepartamentos extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(registroNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
-                    .addComponent(registroID))
-                .addGap(56, 56, 56)
-                .addComponent(agregarDepartamento)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(registroNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                            .addComponent(registroID))
+                        .addGap(56, 56, 56)
+                        .addComponent(agregarDepartamento)))
                 .addContainerGap(197, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -79,11 +124,29 @@ public class RegistroDepartamentos extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(registroNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(agregarDepartamento))
-                .addContainerGap(442, Short.MAX_VALUE))
+                .addGap(46, 46, 46)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void agregarDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarDepartamentoActionPerformed
+        // TODO add your handling code here:
+        String nombreDepartamento = registroNombre.getText().trim();
+        
+        if(!gestor.agregarDepartamento(nombreDepartamento)){
+           //CONSOLA PARA HACER PRUEBAS
+            System.out.println("no se agregó el nombre");
+        }else{
+            //Hacer código
+            mostrarDepartamentos();
+        }
+        
+        
+        
+    }//GEN-LAST:event_agregarDepartamentoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -114,7 +177,9 @@ public class RegistroDepartamentos extends javax.swing.JFrame {
     private javax.swing.JButton agregarDepartamento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField registroID;
     private javax.swing.JTextField registroNombre;
+    private javax.swing.JTable tablaDepartamentos;
     // End of variables declaration//GEN-END:variables
 }

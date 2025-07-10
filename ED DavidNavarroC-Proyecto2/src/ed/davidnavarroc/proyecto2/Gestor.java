@@ -12,6 +12,7 @@ public class Gestor {
     private Departamento[] departamentos;
     private int ultimoDep;
     private int idDepartamento;
+    private int idArticulo;
 
     public Gestor() {
         this.departamentos = new Departamento[20];
@@ -44,6 +45,16 @@ public class Gestor {
     public void setIdDepartamento(int idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
+
+    public int getIdArticulo() {
+        return idArticulo;
+    }
+
+    public void setIdArticulo(int idArticulo) {
+        this.idArticulo = idArticulo;
+    }
+    
+    
     
     //------------------------------------------------------
     

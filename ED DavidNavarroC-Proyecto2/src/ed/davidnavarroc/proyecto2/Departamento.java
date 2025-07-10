@@ -8,16 +8,24 @@ public class Departamento {
     
     private int id;
     private String nombre;
-    private Articulo[] articulos = new Articulo[20];
-    private int frenteCola = 0;
-    private int finalCola = -1;
-    private int numActualCola = 0;
+    private Articulo[] articulos;
+    private int frenteCola;
+    private int finalCola;
+    //private int numActualCola;
 
-    public Departamento(int id, String nombre) {
+    public Departamento(int id, String nombre, Articulo[] articulos, int frenteCola, int finalCola, int numActualCola) {
         this.id = id;
         this.nombre = nombre;
+        this.articulos = new Articulo[20];
+        this.frenteCola = 0;
+        this.finalCola = -1;
+        //this.numActualCola = numActualCola;
     }
 
+    
+ 
+    //-------------------------------------------------
+    
     public int getId() {
         return id;
     }
@@ -58,11 +66,13 @@ public class Departamento {
         this.finalCola = finalCola;
     }
 
-    public int getNumActualCola() {
+   /* public int getNumActualCola() {
         return numActualCola;
     }
 
     public void setNumActualCola(int numActualCola) {
         this.numActualCola = numActualCola;
-    }
+    }*/
+    
+    //-------------------------------------------------
 }

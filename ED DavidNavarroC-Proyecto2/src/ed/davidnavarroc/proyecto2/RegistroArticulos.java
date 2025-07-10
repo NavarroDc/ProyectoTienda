@@ -4,6 +4,8 @@
  */
 package ed.davidnavarroc.proyecto2;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author angel
@@ -16,6 +18,21 @@ public class RegistroArticulos extends javax.swing.JFrame {
     
     public void recibirGestor(Gestor gestor){ //Método público para compartir la misma instancia con otras ventanas
         this.gestor = gestor;
+        mostrarDepartamentos();
+    }
+    
+    public void mostrarDepartamentos(){
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaElegirDepartamentos.getModel();
+        modeloTabla.setRowCount(0);
+        
+        Departamento[] listaDepartamentos = gestor.getDepartamentos();
+        
+        for(int i = 0; i <= gestor.getUltimoDep(); i++){
+            Departamento departamento = listaDepartamentos[i];
+            if(departamento != null){
+                modeloTabla.addRow(new Object[]{departamento.getId(), departamento.getNombre()});
+            }
+        }
     }
 
     /**
@@ -34,17 +51,51 @@ public class RegistroArticulos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaElegirDepartamentos = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tablaElegirDepartamentos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaElegirDepartamentos);
+
+        jLabel1.setText("Elija el departamento");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 648, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(580, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 529, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(2, 2, 2)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(551, Short.MAX_VALUE))
         );
 
         pack();
@@ -76,5 +127,8 @@ public class RegistroArticulos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaElegirDepartamentos;
     // End of variables declaration//GEN-END:variables
 }

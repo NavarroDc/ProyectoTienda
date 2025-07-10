@@ -11,19 +11,15 @@ public class Departamento {
     private Articulo[] articulos;
     private int frenteCola;
     private int finalCola;
-    //private int numActualCola;
 
-    public Departamento(int id, String nombre, Articulo[] articulos, int frenteCola, int finalCola, int numActualCola) {
+    public Departamento(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
         this.articulos = new Articulo[20];
         this.frenteCola = 0;
         this.finalCola = -1;
-        //this.numActualCola = numActualCola;
     }
-
     
- 
     //-------------------------------------------------
     
     public int getId() {
@@ -64,15 +60,24 @@ public class Departamento {
 
     public void setFinalCola(int finalCola) {
         this.finalCola = finalCola;
-    }
-
-   /* public int getNumActualCola() {
-        return numActualCola;
-    }
-
-    public void setNumActualCola(int numActualCola) {
-        this.numActualCola = numActualCola;
-    }*/
-    
+    } 
     //-------------------------------------------------
+    
+    public boolean colaLlena(){
+        boolean cLlena = false;
+        
+        if(finalCola == articulos.length - 1){
+            cLlena = true;
+        }
+       return cLlena;
+    }
+    
+    public boolean agregarArticulo(Articulo nuevoArticulo){
+        if(colaLlena()){
+            return false;
+        }
+        
+        articulos[++finalCola] = nuevoArticulo;
+        return true;
+    }
 }

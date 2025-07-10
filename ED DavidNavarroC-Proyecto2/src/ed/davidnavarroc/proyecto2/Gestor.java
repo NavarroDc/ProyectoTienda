@@ -64,7 +64,6 @@ public class Gestor {
     }
     
     public boolean agregarDepartamento(String nombreDepartamento){
-        
         if(pilaLlena()){
             return false;
         }
@@ -74,9 +73,7 @@ public class Gestor {
         }
         
         Departamento nuevoDepartamento = new Departamento(idDepartamento, nombreDepartamento.trim());
-        
         departamentos[++ultimoDep] = nuevoDepartamento;
-        
         idDepartamento++;
         
         return true;

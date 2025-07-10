@@ -65,7 +65,4 @@ public class Departamento {
     public void setNumActualCola(int numActualCola) {
         this.numActualCola = numActualCola;
     }
-    
-    
-    
 }

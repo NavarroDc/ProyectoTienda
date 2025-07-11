@@ -138,6 +138,7 @@ public class RegistroDepartamentos extends javax.swing.JFrame {
         
         if(!gestor.agregarDepartamento(nombreDepartamento)){
            //CONSOLA PARA HACER PRUEBAS
+           //Acá puede ir un dialog con la validación
             System.out.println("no se agregó el nombre");
         }else{
             //Hacer código

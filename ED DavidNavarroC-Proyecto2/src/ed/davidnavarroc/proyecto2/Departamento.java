@@ -77,7 +77,7 @@ public class Departamento {
             return false;
         }
         finalCola++;
-        articulos[++finalCola] = nuevoArticulo;
+        articulos[finalCola] = nuevoArticulo;
         return true;
     }
 }

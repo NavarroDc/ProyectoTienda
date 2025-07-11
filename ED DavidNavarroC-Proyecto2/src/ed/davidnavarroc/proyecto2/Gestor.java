@@ -55,8 +55,6 @@ public class Gestor {
         this.idArticulo = idArticulo;
     }
     
-    
-    
     //------------------------------------------------------
     
     public boolean pilaLlena(){

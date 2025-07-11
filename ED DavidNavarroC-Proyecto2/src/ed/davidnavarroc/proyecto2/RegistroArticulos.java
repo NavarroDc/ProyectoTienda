@@ -252,10 +252,8 @@ public class RegistroArticulos extends javax.swing.JFrame {
                 if(articulo != null){
                     System.out.println("- "+articulo.getId()+ " | " + articulo.getNombre() + " | "+ articulo.getCategoria());
                 }
-                
-                idArticulo.setText(String.valueOf(gestor.getIdArticulo()));
-                
             }
+            idArticulo.setText(String.valueOf(gestor.getIdArticulo()));
         }else{
             System.out.println("no, cola llena");
         }

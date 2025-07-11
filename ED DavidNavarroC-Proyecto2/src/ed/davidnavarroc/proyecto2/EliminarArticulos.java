@@ -4,6 +4,8 @@
  */
 package ed.davidnavarroc.proyecto2;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author angel
@@ -13,9 +15,26 @@ public class EliminarArticulos extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EliminarArticulos.class.getName());
 
     private Gestor gestor;//Referencia del gestor centralizado
+    private Departamento departamentoSeleccionado;
+
     
     public void recibirGestor(Gestor gestor){ //Método público para compartir la misma instancia con otras ventanas
         this.gestor = gestor;
+        mostrarDepartamentos();
+    }
+    
+    public void mostrarDepartamentos(){
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaElegirDep.getModel();
+        modeloTabla.setRowCount(0);
+        
+        Departamento[] listaDepartamentos = gestor.getDepartamentos();
+        
+        for(int i = 0; i <= gestor.getUltimoDep(); i++){
+            Departamento departamento = listaDepartamentos[i];
+            if(departamento != null){
+                modeloTabla.addRow(new Object[]{departamento.getId(), departamento.getNombre()});
+            }
+        }
     }
     /**
      * Creates new form EliminarArticulos
@@ -34,12 +53,12 @@ public class EliminarArticulos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaElegirDep = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaElegirDep.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -55,7 +74,12 @@ public class EliminarArticulos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        tablaElegirDep.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaElegirDepMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaElegirDep);
 
         jLabel1.setText("Elija el departamento para eliminar el artículo");
 
@@ -82,6 +106,26 @@ public class EliminarArticulos extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tablaElegirDepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaElegirDepMouseClicked
+        // TODO add your handling code here:
+        int filaClick = tablaElegirDep.getSelectedRow();
+        
+        if(filaClick != -1){
+            int idBuscar = (int)tablaElegirDep.getValueAt(filaClick, 0);
+            
+            Departamento[] departamentosReg = gestor.getDepartamentos();
+            
+            for(int i = 0; i <= gestor.getUltimoDep(); i++){
+                Departamento departamento = departamentosReg[i];
+                if(departamento.getId() == idBuscar){
+                    departamentoSeleccionado = departamento;
+                    System.out.println("Departamento seleccionado: " + departamentoSeleccionado.getNombre());
+                    break;
+                }
+            }
+        }
+    }//GEN-LAST:event_tablaElegirDepMouseClicked
 
     /**
      * @param args the command line arguments
@@ -111,6 +155,6 @@ public class EliminarArticulos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaElegirDep;
     // End of variables declaration//GEN-END:variables
 }

@@ -143,6 +143,7 @@ public class RegistroDepartamentos extends javax.swing.JFrame {
         }else{
             //Hacer código
             mostrarDepartamentos();
+            registroNombre.setText("");
         }
         
         

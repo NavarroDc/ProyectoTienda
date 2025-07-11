@@ -226,6 +226,7 @@ public class RegistroArticulos extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(departamentoSeleccionado == null){
             System.out.println("No hay departamento seleccionado");
+            return;
         }
         
         String nomArticulo = nombreArticulo.getText().trim();

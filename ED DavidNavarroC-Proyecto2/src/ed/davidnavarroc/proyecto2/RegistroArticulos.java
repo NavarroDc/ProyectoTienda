@@ -15,6 +15,7 @@ public class RegistroArticulos extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegistroArticulos.class.getName());
     
     private Gestor gestor;//Referencia del gestor centralizado
+    private Departamento departamentoSeleccionado;
     
     public void recibirGestor(Gestor gestor){ //Método público para compartir la misma instancia con otras ventanas
         this.gestor = gestor;
@@ -54,6 +55,14 @@ public class RegistroArticulos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaElegirDepartamentos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        categoriaArticulo = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        idArticulo = new javax.swing.JTextField();
+        nombreArticulo = new javax.swing.JTextField();
+        btnAgregarArticulo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,9 +82,50 @@ public class RegistroArticulos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablaElegirDepartamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaElegirDepartamentosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaElegirDepartamentos);
 
-        jLabel1.setText("Elija el departamento");
+        jLabel1.setText("Elija el departamento para registrar el artículo");
+
+        jLabel2.setText("Registrar artículos");
+
+        jLabel3.setText("ID");
+
+        jLabel4.setText("Nombre");
+
+        categoriaArticulo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ropa y accesorios", "Electrónica", "Hogar y muebles", "Belleza y cuidado personal", "Deportes y aire libre", "Juguetes y juegos", "Alimentos y bebidas" }));
+        categoriaArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                categoriaArticuloActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Categoría");
+
+        idArticulo.setEditable(false);
+        idArticulo.setText("ID Automático");
+        idArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idArticuloActionPerformed(evt);
+            }
+        });
+
+        nombreArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreArticuloActionPerformed(evt);
+            }
+        });
+
+        btnAgregarArticulo.setText("Agregar artículo");
+        btnAgregarArticulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarArticuloActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -84,22 +134,132 @@ public class RegistroArticulos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(580, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(idArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(nombreArticulo)
+                                    .addComponent(categoriaArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(54, 54, 54)
+                        .addComponent(btnAgregarArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(68, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(87, 87, 87))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(2, 2, 2)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(551, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3)
+                            .addComponent(idArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(nombreArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(categoriaArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgregarArticulo)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(444, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tablaElegirDepartamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaElegirDepartamentosMouseClicked
+        // TODO add your handling code here:
+        int filaClick = tablaElegirDepartamentos.getSelectedRow();
+        
+        if(filaClick != -1){
+            int idBuscar = (int)tablaElegirDepartamentos.getValueAt(filaClick, 0);
+            
+            Departamento[] departamentosReg = gestor.getDepartamentos();
+            
+            for(int i = 0; i <= gestor.getUltimoDep(); i++){
+                Departamento departamento = gestor.getDepartamentos()[i];
+                if(departamento.getId() == idBuscar){
+                    departamentoSeleccionado = departamento;
+                    break;
+                }
+            }
+            idArticulo.setText(String.valueOf(gestor.getIdArticulo()));
+        }
+        
+    }//GEN-LAST:event_tablaElegirDepartamentosMouseClicked
+
+    private void categoriaArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoriaArticuloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_categoriaArticuloActionPerformed
+
+    private void idArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idArticuloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idArticuloActionPerformed
+
+    private void nombreArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreArticuloActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreArticuloActionPerformed
+
+    private void btnAgregarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarArticuloActionPerformed
+        // TODO add your handling code here:
+        if(departamentoSeleccionado == null){
+            System.out.println("No hay departamento seleccionado");
+        }
+        
+        String nomArticulo = nombreArticulo.getText().trim();
+        String catArticulo = categoriaArticulo.getSelectedItem().toString();
+        
+        if(nomArticulo.isEmpty()){
+            System.out.println("Nombre art vacío");
+            return;
+        }
+        
+        Articulo articuloNuevo = new Articulo(gestor.getIdArticulo(), nomArticulo, catArticulo);
+        
+        if(departamentoSeleccionado.agregarArticulo(articuloNuevo)){
+            gestor.incrementarIdArticulo();
+            nombreArticulo.setText("");
+            
+            System.out.println("Artículo agregado al departamento: " + departamentoSeleccionado.getNombre());
+            System.out.println("Artículos actuales:");
+            
+            Articulo[] listaArticulos = departamentoSeleccionado.getArticulos();
+            for(int i = departamentoSeleccionado.getFrenteCola(); i<= departamentoSeleccionado.getFinalCola(); i++){
+                Articulo articulo = listaArticulos[i];
+                
+                if(articulo != null){
+                    System.out.println("- "+articulo.getId()+ " | " + articulo.getNombre() + " | "+ articulo.getCategoria());
+                }
+                
+                idArticulo.setText(String.valueOf(gestor.getIdArticulo()));
+                
+            }
+        }else{
+            System.out.println("no, cola llena");
+        }
+    }//GEN-LAST:event_btnAgregarArticuloActionPerformed
 
     /**
      * @param args the command line arguments
@@ -127,8 +287,16 @@ public class RegistroArticulos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarArticulo;
+    private javax.swing.JComboBox<String> categoriaArticulo;
+    private javax.swing.JTextField idArticulo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField nombreArticulo;
     private javax.swing.JTable tablaElegirDepartamentos;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,6 +18,7 @@ public class Gestor {
         this.departamentos = new Departamento[20];
         this.ultimoDep = -1;
         this.idDepartamento = 1;
+        this.idArticulo = 1;
     }
 
     //------------------------------------------------------
@@ -88,6 +89,11 @@ public class Gestor {
         idDepartamento++;
         
         return true;
+    }
+    
+    public void incrementarIdArticulo() {
+    idArticulo++;
+    
     }
     
     

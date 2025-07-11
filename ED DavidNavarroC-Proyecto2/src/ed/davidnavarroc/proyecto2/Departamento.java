@@ -76,7 +76,7 @@ public class Departamento {
         if(colaLlena()){
             return false;
         }
-        
+        finalCola++;
         articulos[++finalCola] = nuevoArticulo;
         return true;
     }

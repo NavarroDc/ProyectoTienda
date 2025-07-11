@@ -63,6 +63,8 @@ public class RegistroArticulos extends javax.swing.JFrame {
         idArticulo = new javax.swing.JTextField();
         nombreArticulo = new javax.swing.JTextField();
         btnAgregarArticulo = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        depSeleccionado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,6 +129,15 @@ public class RegistroArticulos extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setText("El departamento seleccionado es:");
+
+        depSeleccionado.setEditable(false);
+        depSeleccionado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                depSeleccionadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -156,7 +167,14 @@ public class RegistroArticulos extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(19, 19, 19))))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(depSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -182,7 +200,11 @@ public class RegistroArticulos extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(categoriaArticulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAgregarArticulo))))
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(depSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -205,6 +227,7 @@ public class RegistroArticulos extends javax.swing.JFrame {
                 }
             }
             idArticulo.setText(String.valueOf(gestor.getIdArticulo()));
+            depSeleccionado.setText(departamentoSeleccionado.getNombre());
         }
         
     }//GEN-LAST:event_tablaElegirDepartamentosMouseClicked
@@ -254,10 +277,17 @@ public class RegistroArticulos extends javax.swing.JFrame {
                 }
             }
             idArticulo.setText(String.valueOf(gestor.getIdArticulo()));
+            
+
         }else{
             System.out.println("no, cola llena");
         }
+        
     }//GEN-LAST:event_btnAgregarArticuloActionPerformed
+
+    private void depSeleccionadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depSeleccionadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_depSeleccionadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,12 +317,14 @@ public class RegistroArticulos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarArticulo;
     private javax.swing.JComboBox<String> categoriaArticulo;
+    private javax.swing.JTextField depSeleccionado;
     private javax.swing.JTextField idArticulo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nombreArticulo;
     private javax.swing.JTable tablaElegirDepartamentos;

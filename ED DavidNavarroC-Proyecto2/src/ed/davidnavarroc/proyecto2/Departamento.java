@@ -4,6 +4,8 @@
  */
 package ed.davidnavarroc.proyecto2;
 
+import javax.swing.JOptionPane;
+
 public class Departamento {
     
     private int id;
@@ -72,12 +74,30 @@ public class Departamento {
        return cLlena;
     }
     
+    public boolean colaVacia(){
+        boolean cVacia = false;
+        
+        if(finalCola == - 1){
+            cVacia = true;
+        }
+        return cVacia;
+    }
+    
     public boolean agregarArticulo(Articulo nuevoArticulo){
         if(colaLlena()){
             return false;
         }
         finalCola++;
         articulos[finalCola] = nuevoArticulo;
+        return true;
+    }
+    
+    public boolean eliminarArtículo(){
+        if(colaVacia()){
+            return false;
+        }
+        articulos[frenteCola] = null;
+        frenteCola++;//Hace que el frente de la cola sea el siguiente número porque el primero ya se eliminó
         return true;
     }
 }

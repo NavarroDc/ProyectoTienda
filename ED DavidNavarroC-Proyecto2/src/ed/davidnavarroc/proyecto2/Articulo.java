@@ -4,17 +4,22 @@
  */
 package ed.davidnavarroc.proyecto2;
 
+//Propiedas de la clase Artículo
 public class Articulo {
     private int id;
     private String nombre;
     private String categoria;
 
+    //Constructor de la clase Artículo
     public Articulo(int id, String nombre, String categoria) {
         this.id = id;
         this.nombre = nombre;
         this.categoria = categoria;
     }
 
+    //-------------------------------------------
+    
+    //Getters y Setters
     public int getId() {
         return id;
     }
@@ -38,4 +43,6 @@ public class Articulo {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
+    
+    //-------------------------------------------
 }

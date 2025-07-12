@@ -15,22 +15,23 @@ public class RegistroArticulos extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(RegistroArticulos.class.getName());
     
     private Gestor gestor;//Referencia del gestor centralizado
-    private Departamento departamentoSeleccionado;
+    private Departamento departamentoSeleccionado;//Referencia del departamento actual seleccionado
     
     public void recibirGestor(Gestor gestor){ //Método público para compartir la misma instancia con otras ventanas
         this.gestor = gestor;
         mostrarDepartamentos();
     }
     
+    //Método para mostrar los departamentos en la ventana de registro de artículos
     public void mostrarDepartamentos(){
-        DefaultTableModel modeloTabla = (DefaultTableModel) tablaElegirDepartamentos.getModel();
-        modeloTabla.setRowCount(0);
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaElegirDepartamentos.getModel();//Se define el modelo de la tabla
+        modeloTabla.setRowCount(0);//Se limpia la tabla para mostrar los datos actualizados
         
-        Departamento[] listaDepartamentos = gestor.getDepartamentos();
+        Departamento[] listaDepartamentos = gestor.getDepartamentos();//Se obtiene el arreglo de departamentos
         
-        for(int i = 0; i <= gestor.getUltimoDep(); i++){
+        for(int i = 0; i <= gestor.getUltimoDep(); i++){//Recorre desde 0 hasta el último departamento registrado
             Departamento departamento = listaDepartamentos[i];
-            if(departamento != null){
+            if(departamento != null){//Si el objeto de departamento no está vacío o nulo, se muestra en la tabla
                 modeloTabla.addRow(new Object[]{departamento.getId(), departamento.getNombre()});
             }
         }
@@ -210,24 +211,25 @@ public class RegistroArticulos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //Método que define las acciones al hacer click en un departamento de la tabla
     private void tablaElegirDepartamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaElegirDepartamentosMouseClicked
         // TODO add your handling code here:
-        int filaClick = tablaElegirDepartamentos.getSelectedRow();
+        int filaClick = tablaElegirDepartamentos.getSelectedRow();//Se obtiene el número de fila en la que el usuario hizo click
         
-        if(filaClick != -1){
+        if(filaClick != -1){//Si la fila clickeada es valida obtiene el ID del departamento seleccionado
             int idBuscar = (int)tablaElegirDepartamentos.getValueAt(filaClick, 0);
             
-            Departamento[] departamentosReg = gestor.getDepartamentos();
+            Departamento[] departamentosReg = gestor.getDepartamentos();//Obtiene el arreglo de departamentos desde el gestor
             
-            for(int i = 0; i <= gestor.getUltimoDep(); i++){
+            for(int i = 0; i <= gestor.getUltimoDep(); i++){//Recorre los departamentos hasta que el ID coincida con alguno
                 Departamento departamento = gestor.getDepartamentos()[i];
-                if(departamento.getId() == idBuscar){
+                if(departamento.getId() == idBuscar){//Si el ID coincide, se guarda como el departamento seleccionado
                     departamentoSeleccionado = departamento;
-                    break;
+                    break;//Se detiene el ciclo porque ya se encontró el departamento 
                 }
             }
-            idArticulo.setText(String.valueOf(gestor.getIdArticulo()));
-            depSeleccionado.setText(departamentoSeleccionado.getNombre());
+            idArticulo.setText(String.valueOf(gestor.getIdArticulo()));//Muestra el siguiente ID disponible al momento de ingresar un artículo nuevo
+            depSeleccionado.setText(departamentoSeleccionado.getNombre());//Muestra el nombre del departamento selccionado
         }
         
     }//GEN-LAST:event_tablaElegirDepartamentosMouseClicked
@@ -244,42 +246,47 @@ public class RegistroArticulos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreArticuloActionPerformed
 
+    //Método que define las acciones al presionar el botón de Agregar Artículo
     private void btnAgregarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarArticuloActionPerformed
         // TODO add your handling code here:
-        if(departamentoSeleccionado == null){
+        if(departamentoSeleccionado == null){//Si no hay ningún departamento seleccionado, terminan las funciones
             System.out.println("No hay departamento seleccionado");
             return;
         }
         
-        String nomArticulo = nombreArticulo.getText().trim();
-        String catArticulo = categoriaArticulo.getSelectedItem().toString();
+        //Obtiene los datos del nuevo artículo desde los campos de texto
+        String nomArticulo = nombreArticulo.getText().trim();//Textfield
+        String catArticulo = categoriaArticulo.getSelectedItem().toString();//Combo box
         
-        if(nomArticulo.isEmpty()){
+        if(nomArticulo.isEmpty()){//Si el campo del nombre está vacío, termina sin agregar nada
             System.out.println("Nombre art vacío");
             return;
         }
         
-        Articulo articuloNuevo = new Articulo(gestor.getIdArticulo(), nomArticulo, catArticulo);
+        Articulo articuloNuevo = new Articulo(gestor.getIdArticulo(), nomArticulo, catArticulo);//Crea un nuevo objeto Artículo con el ID consecutivo actual, el nombre y categoría ingresador por el usuario
         
-        if(departamentoSeleccionado.agregarArticulo(articuloNuevo)){
+        if(departamentoSeleccionado.agregarArticulo(articuloNuevo)){//Agrega el artículo al departamento seleccionado con el método agregarArtículo
+            //Si el artículo se agregó correctamente, el ID se incrementa para el siguiente artículo y el campo del texto se limpia
             gestor.incrementarIdArticulo();
             nombreArticulo.setText("");
             
-            System.out.println("Artículo agregado al departamento: " + departamentoSeleccionado.getNombre());
-            System.out.println("Artículos actuales:");
+            //Pruebas en consola
+            /*System.out.println("Artículo agregado al departamento: " + departamentoSeleccionado.getNombre());
+            System.out.println("Artículos actuales:");*/
             
-            Articulo[] listaArticulos = departamentoSeleccionado.getArticulos();
-            for(int i = departamentoSeleccionado.getFrenteCola(); i<= departamentoSeleccionado.getFinalCola(); i++){
+            Articulo[] listaArticulos = departamentoSeleccionado.getArticulos();//Se guarda en listaArticulos los artículos del departamento seleccionado
+            for(int i = departamentoSeleccionado.getFrenteCola(); i<= departamentoSeleccionado.getFinalCola(); i++){//Recorre la cola de artículos desde el frente al final de la cola (FIFO)
                 Articulo articulo = listaArticulos[i];
                 
-                if(articulo != null){
+                //Pruebas en consola
+                /*if(articulo != null){
                     System.out.println("- "+articulo.getId()+ " | " + articulo.getNombre() + " | "+ articulo.getCategoria());
-                }
+                }*/
             }
-            idArticulo.setText(String.valueOf(gestor.getIdArticulo()));
-            
+            idArticulo.setText(String.valueOf(gestor.getIdArticulo()));//Actualiza en pantalla el ID del siguiente artículo a ingresar
 
         }else{
+            //Pruebas en consola
             System.out.println("no, cola llena");
         }
         

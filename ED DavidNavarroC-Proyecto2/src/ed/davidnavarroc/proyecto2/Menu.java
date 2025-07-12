@@ -61,6 +61,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         btnTrasladarArticulos.setText("Trasladar Artículos");
+        btnTrasladarArticulos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrasladarArticulosActionPerformed(evt);
+            }
+        });
 
         btnEliminarDepartamentos.setText("Eliminar Departamentos");
 
@@ -120,6 +125,14 @@ public class Menu extends javax.swing.JFrame {
         ventanaEliminarArticulos.recibirGestor(gestor);
         ventanaEliminarArticulos.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnEliminarArticulosActionPerformed
+
+    private void btnTrasladarArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrasladarArticulosActionPerformed
+        // TODO add your handling code here:
+        TrasladoArticulos ventanaTrasladarArticulos = new TrasladoArticulos();
+        ventanaTrasladarArticulos.setVisible(true);
+        ventanaTrasladarArticulos.recibirGestor(gestor);
+        ventanaTrasladarArticulos.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnTrasladarArticulosActionPerformed
 
     /**
      * @param args the command line arguments

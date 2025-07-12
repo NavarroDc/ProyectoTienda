@@ -288,8 +288,7 @@ public class RegistroArticulos extends javax.swing.JFrame {
         }else{
             //Pruebas en consola
             System.out.println("no, cola llena");
-        }
-        
+        }  
     }//GEN-LAST:event_btnAgregarArticuloActionPerformed
 
     private void depSeleccionadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_depSeleccionadoActionPerformed

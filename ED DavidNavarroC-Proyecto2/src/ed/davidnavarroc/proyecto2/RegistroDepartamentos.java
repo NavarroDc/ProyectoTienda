@@ -83,7 +83,7 @@ public class RegistroDepartamentos extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {

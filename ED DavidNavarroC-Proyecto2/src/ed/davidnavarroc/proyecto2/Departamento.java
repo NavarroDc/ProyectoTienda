@@ -8,12 +8,14 @@ import javax.swing.JOptionPane;
 
 public class Departamento {
     
+    //Propiedades de la clase Departamento
     private int id;
     private String nombre;
     private Articulo[] articulos;
     private int frenteCola;
     private int finalCola;
 
+    //Constructor de la clase departamento
     public Departamento(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
@@ -24,6 +26,7 @@ public class Departamento {
     
     //-------------------------------------------------
     
+    //Getters y Setters
     public int getId() {
         return id;
     }
@@ -65,39 +68,43 @@ public class Departamento {
     } 
     //-------------------------------------------------
     
+    //Método para verificar si la cola de artículos está llena
     public boolean colaLlena(){
-        boolean cLlena = false;
+        boolean cLlena = false;//Valor booleando para identificar si la cola está llena
         
-        if(finalCola == articulos.length - 1){
+        if(finalCola == articulos.length - 1){//Si el final de la cola es igual a 19, significa que está llena
             cLlena = true;
         }
-       return cLlena;
+       return cLlena;//Retorna el booleano para verificar si la cola está llena
     }
     
+    //Método para verificar si la cola de artículos está vacía
     public boolean colaVacia(){
-        boolean cVacia = false;
+        boolean cVacia = false;//Valor booleano para identificar si la cola está vacía
         
-        if(finalCola == - 1){
+        if(finalCola == - 1){//Si el final de la cola es igual a -1, significa que la cola está vacía
             cVacia = true;
         }
-        return cVacia;
+        return cVacia;//Retorna el valor booleano para verificar si la cola está vacía
     }
     
+    //Método para agregar un artículo en el arreglo de articulos
     public boolean agregarArticulo(Articulo nuevoArticulo){
-        if(colaLlena()){
+        if(colaLlena()){//Si la cola de artículos está llena no se puede agregar más artículos y retorna false
             return false;
         }
-        finalCola++;
-        articulos[finalCola] = nuevoArticulo;
+        finalCola++;//Se incrementa el índice final de la cola (último artículo insertado en la cola) FIFO
+        articulos[finalCola] = nuevoArticulo;//El nuevo artículo se guarda al final de la cola en artículos[]
         return true;
     }
     
+    //Método para eliminar un artículo de la cola de artículos
     public boolean eliminarArtículo(){
-        if(colaVacia()){
+        if(colaVacia()){//Si la cola está vacía retorna false y no continúa
             return false;
         }
-        articulos[frenteCola] = null;
-        frenteCola++;//Hace que el frente de la cola sea el siguiente número porque el primero ya se eliminó
+        articulos[frenteCola] = null;//Se elimina el artículo del frente de la cola con (null)
+        frenteCola++;//Hace que el frente de la cola sea el siguiente número porque el previo ya se eliminó
         return true;
     }
 }

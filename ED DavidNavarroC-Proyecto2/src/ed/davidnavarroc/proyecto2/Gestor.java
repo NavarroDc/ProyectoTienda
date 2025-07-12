@@ -59,7 +59,7 @@ public class Gestor {
     
     //------------------------------------------------------
     
-    //Método para verificar si la pila está de Departamentos está llena
+    //Método para verificar si la pila de Departamentos está llena
     public boolean pilaLlena(){
         boolean pLlena = false;//Valor booleano para identificar si la pila está llena
         if(ultimoDep == departamentos.length - 1){//Si el índice del último departamento es igual a 19 significa que la pila está llena
@@ -68,7 +68,7 @@ public class Gestor {
         return pLlena;//Retorna el booleado para verificar si está llena
     }
     
-    //Método para verificar si una pila está vacía
+    //Método para verificar si la pila de departamentos está vacía
     public boolean pilaVacia(){
         boolean pVacia = false;//Valor booleano para identificar si la pila está vacía
         if(ultimoDep == -1){//Si el índice del último departamento es igual a -1 significa que la pila está vacía

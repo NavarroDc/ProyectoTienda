@@ -15,12 +15,30 @@ public class TrasladoArticulos extends javax.swing.JFrame {
     private Gestor gestor;//Referencia del gestor centralizado
     public void recibirGestor(Gestor gestor){ //Método público para compartir la misma instancia con otras ventanas
         this.gestor = gestor;
+        desplegarDepartamentos();
     }
     /**
      * Creates new form TrasladoArticulos
      */
     public TrasladoArticulos() {
         initComponents();
+        
+    }
+    
+    public void desplegarDepartamentos(){
+        Departamento[] departamentos = gestor.getDepartamentos();
+        
+        departamentoOrigen.removeAllItems();
+        departamentoDestino.removeAllItems();
+        
+        for(int i = 0; i <= gestor.getUltimoDep(); i++){
+            Departamento dep = departamentos[i];
+            
+            if(dep != null){
+                departamentoOrigen.addItem(dep.getNombre());
+                departamentoDestino.addItem(dep.getNombre());
+            }
+        }
     }
 
     /**

@@ -4,6 +4,8 @@
  */
 package ed.davidnavarroc.proyecto2;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author angel
@@ -54,6 +56,7 @@ public class TrasladoArticulos extends javax.swing.JFrame {
         departamentoOrigen = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         departamentoDestino = new javax.swing.JComboBox<>();
+        btnTrasladarArtículos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +68,13 @@ public class TrasladoArticulos extends javax.swing.JFrame {
 
         departamentoDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnTrasladarArtículos.setText("Trasladar");
+        btnTrasladarArtículos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTrasladarArtículosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,12 +82,15 @@ public class TrasladoArticulos extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(departamentoOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(77, 77, 77)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                    .addComponent(departamentoDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnTrasladarArtículos, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(departamentoOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(77, 77, 77)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
+                            .addComponent(departamentoDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(320, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -91,11 +104,31 @@ public class TrasladoArticulos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(departamentoOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(departamentoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(514, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(btnTrasladarArtículos)
+                .addContainerGap(460, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnTrasladarArtículosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrasladarArtículosActionPerformed
+        // TODO add your handling code here:
+        
+        int seleccionOrigen = departamentoOrigen.getSelectedIndex();
+        int seleccionDestino = departamentoDestino.getSelectedIndex();
+        
+        if(seleccionOrigen == -1 || seleccionDestino == -1){
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un departamento de origen y destino...");
+        }
+        
+        if(seleccionOrigen == seleccionDestino){
+            JOptionPane.showMessageDialog(this, "El departamento de origen y destino deben ser distintos...");
+
+        }
+        
+        if(seleccionOrigen < )
+    }//GEN-LAST:event_btnTrasladarArtículosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -123,6 +156,7 @@ public class TrasladoArticulos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnTrasladarArtículos;
     private javax.swing.JComboBox<String> departamentoDestino;
     private javax.swing.JComboBox<String> departamentoOrigen;
     private javax.swing.JLabel jLabel1;

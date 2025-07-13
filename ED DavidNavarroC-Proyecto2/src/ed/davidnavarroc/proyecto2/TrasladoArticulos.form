@@ -23,16 +23,21 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="departamentoOrigen" min="-2" pref="202" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" pref="210" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel2" pref="210" max="32767" attributes="0"/>
-                  <Component id="departamentoDestino" max="32767" attributes="0"/>
+                  <Component id="btnTrasladarArtículos" min="-2" pref="127" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="departamentoOrigen" min="-2" pref="202" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" pref="210" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel2" pref="210" max="32767" attributes="0"/>
+                          <Component id="departamentoDestino" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
               </Group>
               <EmptySpace pref="320" max="32767" attributes="0"/>
           </Group>
@@ -51,7 +56,9 @@
                   <Component id="departamentoOrigen" min="-2" max="-2" attributes="0"/>
                   <Component id="departamentoDestino" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="514" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Component id="btnTrasladarArtículos" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="460" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,6 +103,14 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTrasladarArt&#xed;culos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Trasladar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTrasladarArt&#xed;culosActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

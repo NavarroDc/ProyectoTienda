@@ -119,7 +119,7 @@ public class TrasladoArticulos extends javax.swing.JFrame {
         
         Departamento origen = gestor.getDepartamentos()[departamentoOrigen.getSelectedIndex()];
         if(!origen.alMenosDosArt()){
-            JOptionPane.showMessageDialog(this, "El departamento debe tener al menos 2 artículos...");
+            JOptionPane.showMessageDialog(this, "El departamento debe tener al menos 1 artículo...");
             return;
         }
         

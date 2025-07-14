@@ -119,7 +119,7 @@ public class EliminarDepartamentos extends javax.swing.JFrame {
         Departamento ultimo = gestor.getDepartamentos()[gestor.getUltimoDep()];
         
         if(!ultimo.colaVacia()){
-            JOptionPane.showMessageDialog(this, "El departamento tiene artpiculos, no se puede eliminar...");
+            JOptionPane.showMessageDialog(this, "No se puede eliminar departamentos con artículos...");
             return;
         }
         

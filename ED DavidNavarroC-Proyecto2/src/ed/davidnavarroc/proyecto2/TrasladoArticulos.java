@@ -15,6 +15,8 @@ public class TrasladoArticulos extends javax.swing.JFrame {
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TrasladoArticulos.class.getName());
 
     private Gestor gestor;//Referencia del gestor centralizado
+    private Departamento departamentoSeleccionado;//Referencia del departamento actual seleccionado
+
     public void recibirGestor(Gestor gestor){ //Método público para compartir la misma instancia con otras ventanas
         this.gestor = gestor;
         desplegarDepartamentos();
@@ -115,6 +117,18 @@ public class TrasladoArticulos extends javax.swing.JFrame {
     private void btnTrasladarArtículosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTrasladarArtículosActionPerformed
         // TODO add your handling code here:
         
+        Departamento origen = gestor.getDepartamentos()[departamentoOrigen.getSelectedIndex()];
+        if(!origen.alMenosDosArt()){
+            JOptionPane.showMessageDialog(this, "El departamento debe tener al menos 2 artículos...");
+            return;
+        }
+        
+        if(gestor.getUltimoDep() < 1){
+            System.out.println(gestor.getUltimoDep());
+            JOptionPane.showMessageDialog(this, "Deben haber al menos 2 departamentos...");
+            return;
+        }
+        
         int seleccionOrigen = departamentoOrigen.getSelectedIndex();
         int seleccionDestino = departamentoDestino.getSelectedIndex();
         if(seleccionOrigen == -1 || seleccionDestino == -1){
@@ -124,11 +138,6 @@ public class TrasladoArticulos extends javax.swing.JFrame {
         
         if(seleccionOrigen == seleccionDestino){
             JOptionPane.showMessageDialog(this, "El departamento de origen y destino deben ser distintos...");
-            return;
-        }
-        
-        if(gestor.getUltimoDep() < 1){
-            JOptionPane.showMessageDialog(this, "Deben haber al menos 2 departamentos...");
             return;
         }
         

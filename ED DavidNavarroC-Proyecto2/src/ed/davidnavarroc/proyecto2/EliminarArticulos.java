@@ -4,6 +4,7 @@
  */
 package ed.davidnavarroc.proyecto2;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -82,7 +83,7 @@ public class EliminarArticulos extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         depSeleccionado = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnEliminarArticulos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,10 +141,10 @@ public class EliminarArticulos extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Eiminar artículo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminarArticulos.setText("Eiminar artículo");
+        btnEliminarArticulos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEliminarArticulosActionPerformed(evt);
             }
         });
 
@@ -164,7 +165,7 @@ public class EliminarArticulos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnEliminarArticulos, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -182,7 +183,7 @@ public class EliminarArticulos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(depSeleccionado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnEliminarArticulos))
                 .addContainerGap(425, Short.MAX_VALUE))
         );
 
@@ -203,7 +204,7 @@ public class EliminarArticulos extends javax.swing.JFrame {
                 Departamento departamento = departamentosReg[i];
                 if(departamento.getId() == idBuscar){
                     departamentoSeleccionado = departamento;
-                    System.out.println("Departamento seleccionado: " + departamentoSeleccionado.getNombre());
+                    //System.out.println("Departamento seleccionado: " + departamentoSeleccionado.getNombre());
                     mostrarArticulos();
                     break;
                 }
@@ -217,22 +218,22 @@ public class EliminarArticulos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_depSeleccionadoActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnEliminarArticulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarArticulosActionPerformed
         // TODO add your handling code here:
         if(departamentoSeleccionado == null){
-                System.out.println("Seleccion apt primero");
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un apartamento para eliminar...");
             return;
         }
         
         boolean articuloEliminado = departamentoSeleccionado.eliminarArtículo();
         
         if(articuloEliminado){
-            System.out.println("se eliminó el artículo");
+            //System.out.println("se eliminó el artículo");
             mostrarArticulos();
         }else{
-            System.out.println("No hay articulos");
+            JOptionPane.showMessageDialog(this, "No hay artículos para eliminar...");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnEliminarArticulosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,8 +261,8 @@ public class EliminarArticulos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEliminarArticulos;
     private javax.swing.JTextField depSeleccionado;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

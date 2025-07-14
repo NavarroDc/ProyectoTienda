@@ -4,6 +4,7 @@
  */
 package ed.davidnavarroc.proyecto2;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -250,7 +251,7 @@ public class RegistroArticulos extends javax.swing.JFrame {
     private void btnAgregarArticuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarArticuloActionPerformed
         // TODO add your handling code here:
         if(departamentoSeleccionado == null){//Si no hay ningún departamento seleccionado, terminan las funciones
-            System.out.println("No hay departamento seleccionado");
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un departamento...");
             return;
         }
         
@@ -259,7 +260,7 @@ public class RegistroArticulos extends javax.swing.JFrame {
         String catArticulo = categoriaArticulo.getSelectedItem().toString();//Combo box
         
         if(nomArticulo.isEmpty()){//Si el campo del nombre está vacío, termina sin agregar nada
-            System.out.println("Nombre art vacío");
+            JOptionPane.showMessageDialog(this, "Debe escribir un artículo...");
             return;
         }
         
@@ -287,7 +288,7 @@ public class RegistroArticulos extends javax.swing.JFrame {
 
         }else{
             //Pruebas en consola
-            System.out.println("no, cola llena");
+            System.out.println("La cola de artículos está llena...");
         }  
     }//GEN-LAST:event_btnAgregarArticuloActionPerformed
 

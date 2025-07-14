@@ -91,7 +91,7 @@ public class TrasladoArticulos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                             .addComponent(departamentoDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(320, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +106,7 @@ public class TrasladoArticulos extends javax.swing.JFrame {
                     .addComponent(departamentoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(btnTrasladarArtículos)
-                .addContainerGap(460, Short.MAX_VALUE))
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         pack();
@@ -117,7 +117,6 @@ public class TrasladoArticulos extends javax.swing.JFrame {
         
         int seleccionOrigen = departamentoOrigen.getSelectedIndex();
         int seleccionDestino = departamentoDestino.getSelectedIndex();
-        boolean traslado = gestor.trasladarArticulos(seleccionOrigen, seleccionDestino);
         if(seleccionOrigen == -1 || seleccionDestino == -1){
             JOptionPane.showMessageDialog(this, "Debe seleccionar un departamento de origen y destino...");
             return;
@@ -125,6 +124,11 @@ public class TrasladoArticulos extends javax.swing.JFrame {
         
         if(seleccionOrigen == seleccionDestino){
             JOptionPane.showMessageDialog(this, "El departamento de origen y destino deben ser distintos...");
+            return;
+        }
+        
+        if(gestor.getUltimoDep() < 1){
+            JOptionPane.showMessageDialog(this, "Deben haber al menos 2 departamentos...");
             return;
         }
         
@@ -136,10 +140,7 @@ public class TrasladoArticulos extends javax.swing.JFrame {
             return;
         }
         
-        if(gestor.getUltimoDep() < 1){
-            JOptionPane.showMessageDialog(this, "Deben haber al menos 2 departamentos...");
-            return;
-        }
+        boolean traslado = gestor.trasladarArticulos(seleccionOrigen, seleccionDestino);
         
         if(!traslado){
             JOptionPane.showMessageDialog(this, "El traslado no se realizó correctamente...");

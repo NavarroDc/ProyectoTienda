@@ -117,17 +117,33 @@ public class TrasladoArticulos extends javax.swing.JFrame {
         
         int seleccionOrigen = departamentoOrigen.getSelectedIndex();
         int seleccionDestino = departamentoDestino.getSelectedIndex();
-        
+        boolean traslado = gestor.trasladarArticulos(seleccionOrigen, seleccionDestino);
         if(seleccionOrigen == -1 || seleccionDestino == -1){
             JOptionPane.showMessageDialog(this, "Debe seleccionar un departamento de origen y destino...");
+            return;
         }
         
         if(seleccionOrigen == seleccionDestino){
             JOptionPane.showMessageDialog(this, "El departamento de origen y destino deben ser distintos...");
-
+            return;
         }
         
-        if(seleccionOrigen < )
+        Departamento depOrigen = gestor.getDepartamentos()[seleccionOrigen];
+        Departamento depDestino = gestor.getDepartamentos()[seleccionDestino];
+        
+        if(depOrigen.colaVacia()){
+            JOptionPane.showMessageDialog(this, "El departamento de origen no tiene artículos...");
+            return;
+        }
+        
+        if(gestor.getUltimoDep() < 1){
+            JOptionPane.showMessageDialog(this, "Deben haber al menos 2 departamentos...");
+            return;
+        }
+        
+        if(!traslado){
+            JOptionPane.showMessageDialog(this, "El traslado no se realizó correctamente...");
+        }
     }//GEN-LAST:event_btnTrasladarArtículosActionPerformed
 
     /**

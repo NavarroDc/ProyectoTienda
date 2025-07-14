@@ -72,7 +72,7 @@ public class Departamento {
     public boolean colaLlena(){
         boolean cLlena = false;//Valor booleando para identificar si la cola está llena
         
-        if(finalCola == articulos.length - 1){//Si el final de la cola es igual a 19, significa que está llena
+        if(finalCola >= articulos.length - 1){//Si el final de la cola es mayor o igual a 19, significa que está llena
             cLlena = true;
         }
        return cLlena;//Retorna el booleano para verificar si la cola está llena
@@ -82,7 +82,13 @@ public class Departamento {
     public boolean colaVacia(){
         boolean cVacia = false;//Valor booleano para identificar si la cola está vacía
         
-        if(finalCola == - 1){//Si el final de la cola es igual a -1, significa que la cola está vacía
+        if(frenteCola > finalCola){//Si el final de la cola es igual a -1, significa que la cola está vacía
+            frenteCola = 0;
+            finalCola = -1;
+            cVacia = true;
+        }
+        
+        if(frenteCola == 0 && finalCola == -1){
             cVacia = true;
         }
         return cVacia;//Retorna el valor booleano para verificar si la cola está vacía
@@ -105,6 +111,7 @@ public class Departamento {
         }
         articulos[frenteCola] = null;//Se elimina el artículo del frente de la cola con (null)
         frenteCola++;//Hace que el frente de la cola sea el siguiente número porque el previo ya se eliminó
+
         return true;
     }
 }

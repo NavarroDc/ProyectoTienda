@@ -62,7 +62,7 @@ public class Gestor {
     //Método para verificar si la pila de Departamentos está llena
     public boolean pilaLlena(){
         boolean pLlena = false;//Valor booleano para identificar si la pila está llena
-        if(ultimoDep == departamentos.length - 1){//Si el índice del último departamento es igual a 19 significa que la pila está llena
+        if(ultimoDep >= departamentos.length - 1){//Si el índice del último departamento es mayor o igual a 19 significa que la pila está llena
             pLlena = true;
         }
         return pLlena;//Retorna el booleado para verificar si está llena
@@ -71,7 +71,7 @@ public class Gestor {
     //Método para verificar si la pila de departamentos está vacía
     public boolean pilaVacia(){
         boolean pVacia = false;//Valor booleano para identificar si la pila está vacía
-        if(ultimoDep == -1){//Si el índice del último departamento es igual a -1 significa que la pila está vacía
+        if(ultimoDep == -1){//Si el índice del último departamento es mayor o igual a -1 significa que la pila está vacía
             pVacia = true;
         }
         return pVacia;//Retorna el booleano para verificar si está vacía
@@ -98,5 +98,30 @@ public class Gestor {
     //Método que aumenta el contador de ID de artículos en 1. Se utiliza después de agregar un nuevo artículo para que sea consecutivo
     public void incrementarIdArticulo() {
     idArticulo++;
+    }
+    
+    public boolean trasladarArticulos(int indiceOrigen, int indiceDestino){
+        if(indiceOrigen == indiceDestino){
+        return false;
+        }
+        
+        Departamento depOrigen = departamentos[indiceOrigen];
+        Departamento depDestino = departamentos[indiceDestino];
+        boolean articuloTrasladado = false;
+        
+        
+        
+        while(!depOrigen.colaVacia() && !depDestino.colaLlena()){
+            System.out.println(depOrigen.getFrenteCola());
+            Articulo articulo = depOrigen.getArticulos()[depOrigen.getFrenteCola()];
+            
+            if(depDestino.agregarArticulo(articulo)){
+                depOrigen.eliminarArtículo();
+                articuloTrasladado = true;
+            }else{
+                break;
+            }
+        }
+        return articuloTrasladado;
     }
 }

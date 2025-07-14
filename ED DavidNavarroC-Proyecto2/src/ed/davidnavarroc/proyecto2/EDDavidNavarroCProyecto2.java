@@ -9,10 +9,8 @@ package ed.davidnavarroc.proyecto2;
  * @author angel
  */
 public class EDDavidNavarroCProyecto2 {
-
-  
+    
     public static void main(String[] args) {
         System.out.println("prueba githubbb");
     }
-    
 }

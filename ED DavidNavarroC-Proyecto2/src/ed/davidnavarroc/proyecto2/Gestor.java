@@ -112,7 +112,7 @@ public class Gestor {
         
         
         while(!depOrigen.colaVacia() && !depDestino.colaLlena()){
-            System.out.println(depOrigen.getFrenteCola());
+            //System.out.println(depOrigen.getFrenteCola());
             Articulo articulo = depOrigen.getArticulos()[depOrigen.getFrenteCola()];
             
             if(depDestino.agregarArticulo(articulo)){
@@ -123,5 +123,21 @@ public class Gestor {
             }
         }
         return articuloTrasladado;
+    }
+    
+    public boolean eliminarDepartamentos(){
+        if(pilaVacia()){
+            return false;
+        }
+        
+        Departamento ultimoDepartamento = departamentos[ultimoDep];
+        
+        if(!ultimoDepartamento.colaVacia()){
+            return false;
+        }
+        
+        departamentos[ultimoDep] = null;
+        ultimoDep--;    
+        return true;
     }
 }

@@ -145,9 +145,6 @@ public class RegistroDepartamentos extends javax.swing.JFrame {
             mostrarDepartamentos();
             registroNombre.setText("");
         }
-        
-        
-        
     }//GEN-LAST:event_agregarDepartamentoActionPerformed
 
     /**

@@ -4,6 +4,9 @@
  */
 package ed.davidnavarroc.proyecto2;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author angel
@@ -17,12 +20,27 @@ public class EliminarDepartamentos extends javax.swing.JFrame {
     
     public void recibirGestor(Gestor gestor){ //Método público para compartir la misma instancia con otras ventanas
         this.gestor = gestor;
+        mostrarDepartamentos();
     }
     /**
      * Creates new form EliminarDepartamentos
      */
     public EliminarDepartamentos() {
         initComponents();
+    }
+    
+    public void mostrarDepartamentos(){
+        DefaultTableModel modeloTabla = (DefaultTableModel) tablaEliminarDepartamentos.getModel();//Se define el modelo de la tabla
+        modeloTabla.setRowCount(0);//Se limpia la tabla para mostrar los datos actualizados
+        
+        Departamento[] listaDepartamentos = gestor.getDepartamentos();//Se obtiene el arreglo de departamentos
+        
+        for(int i = 0; i <= gestor.getUltimoDep(); i++){//Recorre desde 0 hasta el último departamento registrado
+            Departamento departamento = listaDepartamentos[i];
+            if(departamento != null){//Si el objeto de departamento no está vacío o nulo, se muestra en la tabla
+                modeloTabla.addRow(new Object[]{departamento.getId(), departamento.getNombre()});
+            }
+        }
     }
 
     /**
@@ -34,21 +52,85 @@ public class EliminarDepartamentos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaEliminarDepartamentos = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tablaEliminarDepartamentos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaEliminarDepartamentos);
+
+        jButton1.setText("Eliminar Departamento");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 700, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(100, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 554, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49)
+                .addComponent(jButton1)
+                .addContainerGap(225, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(gestor.pilaVacia()){
+            JOptionPane.showMessageDialog(this, "No hay departamentos para eliminar...");
+            return;
+        }
+        
+        Departamento ultimo = gestor.getDepartamentos()[gestor.getUltimoDep()];
+        
+        if(!ultimo.colaVacia()){
+            JOptionPane.showMessageDialog(this, "El departamento tiene artpiculos, no se puede eliminar...");
+            return;
+        }
+        
+        boolean depEliminado = gestor.eliminarDepartamentos();
+        
+        if(depEliminado){
+            mostrarDepartamentos();
+        }else{
+            JOptionPane.showMessageDialog(this, "Error al eliminar el departamento...");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -76,5 +158,8 @@ public class EliminarDepartamentos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tablaEliminarDepartamentos;
     // End of variables declaration//GEN-END:variables
 }

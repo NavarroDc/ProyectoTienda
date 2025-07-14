@@ -4,6 +4,7 @@
  */
 package ed.davidnavarroc.proyecto2;
 
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -136,10 +137,16 @@ public class RegistroDepartamentos extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nombreDepartamento = registroNombre.getText().trim();
         
+        if(nombreDepartamento.isEmpty()){
+            JOptionPane.showMessageDialog(this, "El nombre del departamento no puede estar vacío...");
+            return;
+        }
+        
         if(!gestor.agregarDepartamento(nombreDepartamento)){
            //CONSOLA PARA HACER PRUEBAS
            //Acá puede ir un dialog con la validación
-            System.out.println("no se agregó el nombre");
+           JOptionPane.showMessageDialog(this, "Solo puede agregar 20 departamentos...");
+
         }else{
             //Hacer código
             mostrarDepartamentos();

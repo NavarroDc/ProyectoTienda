@@ -12,6 +12,12 @@ public class EliminarDepartamentos extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EliminarDepartamentos.class.getName());
 
+    private Gestor gestor;//Referencia del gestor centralizado
+    private Departamento departamentoSeleccionado;
+    
+    public void recibirGestor(Gestor gestor){ //Método público para compartir la misma instancia con otras ventanas
+        this.gestor = gestor;
+    }
     /**
      * Creates new form EliminarDepartamentos
      */

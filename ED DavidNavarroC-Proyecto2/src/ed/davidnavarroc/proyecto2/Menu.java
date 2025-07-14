@@ -68,6 +68,11 @@ public class Menu extends javax.swing.JFrame {
         });
 
         btnEliminarDepartamentos.setText("Eliminar Departamentos");
+        btnEliminarDepartamentos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarDepartamentosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -133,6 +138,14 @@ public class Menu extends javax.swing.JFrame {
         ventanaTrasladarArticulos.recibirGestor(gestor);
         ventanaTrasladarArticulos.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnTrasladarArticulosActionPerformed
+
+    private void btnEliminarDepartamentosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDepartamentosActionPerformed
+        // TODO add your handling code here:
+        EliminarDepartamentos ventanaEliminarDepartamentos = new EliminarDepartamentos();
+        ventanaEliminarDepartamentos.setVisible(true);
+        ventanaEliminarDepartamentos.recibirGestor(gestor);
+        ventanaEliminarDepartamentos.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnEliminarDepartamentosActionPerformed
 
     /**
      * @param args the command line arguments

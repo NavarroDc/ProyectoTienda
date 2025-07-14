@@ -119,6 +119,4 @@ public class Departamento {
     public boolean alMenosDosArt(){
         return (finalCola - frenteCola + 1) >= 1;
     }
-    
-    
 }
